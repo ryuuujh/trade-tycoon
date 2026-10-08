@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1430" />
+  <title>무역왕 키우기 : 오늘도 선적은 망했다</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css" />
+  <script type="module" crossorigin src="./assets/index-D_51ZQMk.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B-6N_AFJ.css">
+</head>
+<body>
+  <div id="game" class="boot">
+
+    <!-- ===================== 메인 스테이지 : 항구 ===================== -->
+    <div id="scene" aria-hidden="true">
+      <svg id="scene-svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges">
+        <defs>
+          <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2f7fd0"/>
+            <stop offset=".6" stop-color="#78c2f2"/>
+            <stop offset="1" stop-color="#cdeeff"/>
+          </linearGradient>
+          <linearGradient id="g-sea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2f8fd3"/>
+            <stop offset="1" stop-color="#15497f"/>
+          </linearGradient>
+          <linearGradient id="g-ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9ca7b3"/>
+            <stop offset="1" stop-color="#7d8894"/>
+          </linearGradient>
+          <pattern id="p-wave-a" width="16" height="8" patternUnits="userSpaceOnUse">
+            <rect x="1" y="1" width="5" height="1" fill="#a9e2ff" opacity=".85"/>
+            <rect x="10" y="5" width="3" height="1" fill="#a9e2ff" opacity=".55"/>
+          </pattern>
+          <pattern id="p-wave-b" width="20" height="10" patternUnits="userSpaceOnUse">
+            <rect x="6" y="3" width="4" height="1" fill="#ffffff" opacity=".35"/>
+            <rect x="15" y="8" width="2" height="1" fill="#ffffff" opacity=".3"/>
+          </pattern>
+          <pattern id="p-corr" width="2" height="1" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" fill="#000" opacity=".16"/>
+          </pattern>
+          <pattern id="p-lattice" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect x="1" y="0" width="1" height="4" fill="#000" opacity=".22"/>
+          </pattern>
+          <pattern id="p-ground" width="16" height="16" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="16" height="1" fill="#000" opacity=".08"/>
+            <rect x="0" y="0" width="1" height="16" fill="#000" opacity=".08"/>
+            <rect x="9" y="6" width="2" height="1" fill="#fff" opacity=".08"/>
+          </pattern>
+          <pattern id="p-hatch" width="4" height="4" patternUnits="userSpaceOnUse">
+            <rect width="4" height="4" fill="#e8c547"/>
+            <rect x="0" y="0" width="2" height="4" fill="#2b2f36"/>
+          </pattern>
+          <pattern id="p-roof" width="4" height="2" patternUnits="userSpaceOnUse">
+            <rect x="0" y="1" width="4" height="1" fill="#000" opacity=".15"/>
+          </pattern>
+        </defs>
+
+        <!-- 하늘 -->
+        <rect x="0" y="0" width="320" height="62" fill="url(#g-sky)"/>
+        <g class="sun">
+          <rect x="190" y="4" width="22" height="22" fill="#fff6c2" opacity=".2"/>
+          <rect x="193" y="7" width="16" height="16" fill="#fff6c2" opacity=".3"/>
+          <rect x="196" y="9" width="10" height="12" fill="#fff2a1"/>
+          <rect x="195" y="10" width="12" height="10" fill="#fff2a1"/>
+        </g>
+        <g class="cloud cloud-1" fill="#ffffff" opacity=".92">
+          <rect x="0" y="5" width="30" height="6"/><rect x="6" y="1" width="12" height="4"/><rect x="18" y="3" width="8" height="2"/>
+          <rect x="0" y="10" width="30" height="1" fill="#000" opacity=".06"/>
+        </g>
+        <g class="cloud cloud-2" fill="#ffffff" opacity=".92">
+          <rect x="0" y="6" width="42" height="7"/><rect x="8" y="2" width="14" height="4"/><rect x="24" y="0" width="10" height="6"/><rect x="34" y="4" width="6" height="2"/>
+          <rect x="0" y="12" width="42" height="1" fill="#000" opacity=".06"/>
+        </g>
+        <g class="cloud cloud-3" fill="#ffffff" opacity=".85">
+          <rect x="0" y="4" width="24" height="5"/><rect x="5" y="1" width="10" height="3"/>
+        </g>
+
+        <!-- 원경 : 산 + 건너편 항만 -->
+        <g fill="#a7d3ef">
+          <polygon points="0,52 30,40 58,50 90,38 122,50 150,44 180,52 320,52 320,62 0,62"/>
+          <polygon points="200,50 236,40 268,50 300,42 320,50 320,62 200,62"/>
+        </g>
+        <g fill="#8dbfe4">
+          <rect x="0" y="54" width="320" height="8"/>
+          <rect x="12" y="48" width="10" height="6"/><rect x="26" y="44" width="6" height="10"/>
+          <rect x="44" y="50" width="14" height="4"/><rect x="66" y="46" width="8" height="8"/>
+          <rect x="80" y="51" width="18" height="3"/><rect x="104" y="42" width="6" height="12"/>
+          <rect x="112" y="47" width="12" height="7"/><rect x="132" y="50" width="20" height="4"/>
+          <rect x="160" y="45" width="7" height="9"/><rect x="170" y="49" width="16" height="5"/>
+          <rect x="194" y="41" width="5" height="13"/><rect x="202" y="48" width="22" height="6"/>
+          <rect x="232" y="46" width="9" height="8"/><rect x="248" y="51" width="26" height="3"/>
+          <rect x="284" y="44" width="6" height="10"/><rect x="296" y="49" width="18" height="5"/>
+          <rect x="140" y="36" width="2" height="18"/><rect x="128" y="36" width="26" height="2"/>
+          <rect x="268" y="34" width="2" height="20"/><rect x="258" y="34" width="30" height="2"/>
+        </g>
+
+        <!-- 바다 -->
+        <rect x="0" y="62" width="320" height="62" fill="url(#g-sea)"/>
+        <rect class="wave wave-a" x="-32" y="64" width="384" height="36" fill="url(#p-wave-a)"/>
+        <rect class="wave wave-b" x="-40" y="68" width="400" height="30" fill="url(#p-wave-b)"/>
+
+        <!-- 방파제 + 등대 -->
+        <g>
+          <rect x="0" y="66" width="26" height="8" fill="#6f7d8c"/>
+          <rect x="0" y="66" width="26" height="2" fill="#8d9aa8"/>
+          <rect x="0" y="72" width="26" height="2" fill="#56626f"/>
+          <rect x="8" y="46" width="7" height="20" fill="#f3f4f6"/>
+          <rect x="13" y="46" width="2" height="20" fill="#cfd4da"/>
+          <rect x="8" y="50" width="7" height="3" fill="#d9433b"/>
+          <rect x="8" y="58" width="7" height="3" fill="#d9433b"/>
+          <rect x="7" y="43" width="9" height="3" fill="#333a44"/>
+          <rect class="beacon" x="9" y="44" width="5" height="2" fill="#ffe66d"/>
+          <rect x="6" y="64" width="11" height="2" fill="#56626f"/>
+        </g>
+
+        <!-- 부표 / 예인선 -->
+        <g class="buoy buoy-1"><rect x="0" y="0" width="3" height="4" fill="#e74c3c"/><rect x="1" y="-2" width="1" height="2" fill="#333"/></g>
+        <g class="buoy buoy-2"><rect x="0" y="0" width="3" height="4" fill="#f1c40f"/><rect x="1" y="-2" width="1" height="2" fill="#333"/></g>
+        <g class="tug">
+          <polygon points="0,8 2,13 24,13 26,8" fill="#2c3e50"/>
+          <rect x="0" y="8" width="26" height="1" fill="#e74c3c"/>
+          <rect x="5" y="4" width="11" height="4" fill="#ecf0f1"/>
+          <rect x="7" y="1" width="4" height="3" fill="#e67e22"/>
+          <rect x="7" y="5" width="2" height="2" fill="#2a3a55"/><rect x="11" y="5" width="2" height="2" fill="#2a3a55"/>
+          <rect x="2" y="10" width="22" height="1" fill="#000" opacity=".25"/>
+        </g>
+
+        <!-- 화물선 -->
+        <g class="ship">
+          <g class="smoke" fill="#ffffff" opacity=".7">
+            <rect class="puff puff-1" x="148" y="-14" width="3" height="3"/>
+            <rect class="puff puff-2" x="151" y="-18" width="4" height="4"/>
+            <rect class="puff puff-3" x="155" y="-23" width="5" height="5"/>
+          </g>
+          <!-- 선체 -->
+          <polygon points="0,26 6,44 160,44 168,26" fill="#b83b31"/>
+          <polygon points="3,36 6,44 160,44 162,36" fill="#6f231c"/>
+          <polygon points="0,26 2,30 166,30 168,26" fill="#d4544a"/>
+          <rect x="2" y="31" width="164" height="1" fill="#f4e4c1"/>
+          <rect x="0" y="24" width="168" height="3" fill="#4c4c52"/>
+          <rect x="0" y="24" width="168" height="1" fill="#6b6b73"/>
+          <g fill="#2b2b30">
+            <rect x="20" y="33" width="2" height="2"/><rect x="30" y="33" width="2" height="2"/><rect x="40" y="33" width="2" height="2"/>
+            <rect x="120" y="33" width="2" height="2"/><rect x="130" y="33" width="2" height="2"/><rect x="140" y="33" width="2" height="2"/>
+          </g>
+          <text x="50" y="40" font-size="5" fill="#f4e4c1" font-family="Galmuri11, monospace">TYCOON EXPRESS</text>
+          <!-- 갑판 컨테이너 (3단) -->
+          <g>
+            <rect x="8" y="18" width="12" height="6" fill="#e0592a"/><rect x="21" y="18" width="12" height="6" fill="#3b82d6"/>
+            <rect x="34" y="18" width="12" height="6" fill="#3bb273"/><rect x="47" y="18" width="12" height="6" fill="#e9c93a"/>
+            <rect x="60" y="18" width="12" height="6" fill="#8e5bd3"/><rect x="73" y="18" width="12" height="6" fill="#e0592a"/>
+            <rect x="86" y="18" width="12" height="6" fill="#3b82d6"/><rect x="99" y="18" width="12" height="6" fill="#3bb273"/>
+            <rect x="112" y="18" width="12" height="6" fill="#e9c93a"/>
+            <rect x="8" y="12" width="12" height="6" fill="#3bb273"/><rect x="21" y="12" width="12" height="6" fill="#e9c93a"/>
+            <rect x="34" y="12" width="12" height="6" fill="#e0592a"/><rect x="47" y="12" width="12" height="6" fill="#8e5bd3"/>
+            <rect x="60" y="12" width="12" height="6" fill="#3b82d6"/><rect x="86" y="12" width="12" height="6" fill="#e0592a"/>
+            <rect x="99" y="12" width="12" height="6" fill="#3b82d6"/><rect x="112" y="12" width="12" height="6" fill="#8e5bd3"/>
+            <rect x="21" y="6" width="12" height="6" fill="#3b82d6"/><rect x="34" y="6" width="12" height="6" fill="#e9c93a"/>
+            <rect x="60" y="6" width="12" height="6" fill="#3bb273"/><rect x="99" y="6" width="12" height="6" fill="#e0592a"/>
+            <!-- 명암 : 상단 하이라이트 / 하단 그림자 / 주름 -->
+            <g fill="#ffffff" opacity=".28">
+              <rect x="8" y="18" width="116" height="1"/><rect x="8" y="12" width="116" height="1"/><rect x="21" y="6" width="25" height="1"/><rect x="60" y="6" width="12" height="1"/><rect x="99" y="6" width="12" height="1"/>
+            </g>
+            <g fill="#000000" opacity=".28">
+              <rect x="8" y="23" width="116" height="1"/><rect x="8" y="17" width="116" height="1"/><rect x="21" y="11" width="25" height="1"/><rect x="60" y="11" width="12" height="1"/><rect x="99" y="11" width="12" height="1"/>
+            </g>
+            <rect x="8" y="6" width="116" height="18" fill="url(#p-corr)"/>
+          </g>
+          <!-- 선교 -->
+          <rect x="132" y="6" width="30" height="18" fill="#e9eff5"/>
+          <rect x="156" y="6" width="6" height="18" fill="#c9d3dd"/>
+          <rect x="132" y="6" width="30" height="1" fill="#ffffff"/>
+          <rect x="134" y="2" width="26" height="5" fill="#f7f9fb"/>
+          <rect x="134" y="6" width="26" height="1" fill="#000" opacity=".2"/>
+          <g fill="#2a3a55">
+            <rect x="136" y="3" width="3" height="2"/><rect x="141" y="3" width="3" height="2"/><rect x="146" y="3" width="3" height="2"/><rect x="151" y="3" width="3" height="2"/>
+            <rect x="136" y="10" width="2" height="2"/><rect x="140" y="10" width="2" height="2"/><rect x="144" y="10" width="2" height="2"/><rect x="148" y="10" width="2" height="2"/>
+            <rect x="136" y="16" width="2" height="2"/><rect x="140" y="16" width="2" height="2"/>
+          </g>
+          <rect x="148" y="-6" width="7" height="9" fill="#d7463b"/>
+          <rect x="153" y="-6" width="2" height="9" fill="#9b2f26"/>
+          <rect x="148" y="-6" width="7" height="2" fill="#2b2b2b"/>
+          <rect x="142" y="-10" width="1" height="12" fill="#555"/>
+          <rect x="140" y="-10" width="5" height="3" fill="#ffd25a"/>
+          <rect x="128" y="20" width="4" height="4" fill="#3b4652"/>
+          <rect x="0" y="18" width="2" height="8" fill="#4c4c52"/>
+          <rect x="2" y="20" width="3" height="3" fill="#2b2b30"/>
+        </g>
+
+        <!-- 수면 앞 띠 -->
+        <rect x="0" y="116" width="320" height="8" fill="#15497f"/>
+        <rect class="wave wave-c" x="-32" y="116" width="384" height="6" fill="url(#p-wave-a)"/>
+        <rect x="0" y="122" width="320" height="2" fill="#0f3a66"/>
+
+        <!-- 부두 (지면) -->
+        <rect x="0" y="124" width="320" height="76" fill="url(#g-ground)"/>
+        <rect x="0" y="124" width="320" height="76" fill="url(#p-ground)"/>
+        <rect x="0" y="124" width="320" height="2" fill="#d7dde3"/>
+        <rect x="0" y="126" width="320" height="1" fill="#6c7682"/>
+        <!-- 펜더(방충재) -->
+        <g fill="#2b2f36">
+          <rect x="30" y="118" width="6" height="6"/><rect x="90" y="118" width="6" height="6"/><rect x="150" y="118" width="6" height="6"/><rect x="236" y="118" width="6" height="6"/><rect x="296" y="118" width="6" height="6"/>
+        </g>
+        <!-- 계류 로프 -->
+        <g stroke="#5b4320" stroke-width="0.8" fill="none">
+          <path d="M28,101 Q22,112 19,122"/>
+          <path d="M192,101 Q204,112 211,122"/>
+        </g>
+        <!-- 볼라드 -->
+        <g>
+          <rect x="17" y="121" width="4" height="4" fill="#2b2f36"/><rect x="17" y="121" width="4" height="1" fill="#555c66"/>
+          <rect x="74" y="121" width="4" height="4" fill="#2b2f36"/><rect x="74" y="121" width="4" height="1" fill="#555c66"/>
+          <rect x="130" y="121" width="4" height="4" fill="#2b2f36"/><rect x="130" y="121" width="4" height="1" fill="#555c66"/>
+          <rect x="209" y="121" width="4" height="4" fill="#2b2f36"/><rect x="209" y="121" width="4" height="1" fill="#555c66"/>
+          <rect x="290" y="121" width="4" height="4" fill="#2b2f36"/><rect x="290" y="121" width="4" height="1" fill="#555c66"/>
+        </g>
+        <!-- 차선 / 안전구역 -->
+        <rect x="0" y="134" width="320" height="1" fill="#e8c547" opacity=".85"/>
+        <rect x="0" y="152" width="320" height="1" fill="#e8c547" opacity=".5"/>
+        <g fill="#ffffff" opacity=".5">
+          <rect x="4" y="143" width="10" height="1"/><rect x="28" y="143" width="10" height="1"/><rect x="52" y="143" width="10" height="1"/><rect x="76" y="143" width="10" height="1"/>
+          <rect x="100" y="143" width="10" height="1"/><rect x="124" y="143" width="10" height="1"/><rect x="148" y="143" width="10" height="1"/><rect x="172" y="143" width="10" height="1"/>
+          <rect x="196" y="143" width="10" height="1"/><rect x="220" y="143" width="10" height="1"/><rect x="244" y="143" width="10" height="1"/><rect x="268" y="143" width="10" height="1"/><rect x="292" y="143" width="10" height="1"/>
+        </g>
+        <rect x="128" y="127" width="78" height="3" fill="url(#p-hatch)"/>
+        <!-- 맨홀 / 배수구 -->
+        <rect x="52" y="148" width="6" height="2" fill="#5c6670"/><rect x="53" y="148" width="4" height="1" fill="#3f474f"/>
+        <rect x="250" y="138" width="6" height="2" fill="#5c6670"/><rect x="251" y="138" width="4" height="1" fill="#3f474f"/>
+
+        <!-- 하단 도로 -->
+        <rect x="0" y="156" width="320" height="22" fill="#6b7682"/>
+        <rect x="0" y="156" width="320" height="1" fill="#8a95a1"/>
+        <rect x="0" y="177" width="320" height="1" fill="#4f5964"/>
+        <g fill="#e8e8e8" opacity=".7">
+          <rect x="6" y="166" width="12" height="1"/><rect x="34" y="166" width="12" height="1"/><rect x="62" y="166" width="12" height="1"/><rect x="90" y="166" width="12" height="1"/>
+          <rect x="118" y="166" width="12" height="1"/><rect x="146" y="166" width="12" height="1"/><rect x="174" y="166" width="12" height="1"/><rect x="202" y="166" width="12" height="1"/>
+          <rect x="230" y="166" width="12" height="1"/><rect x="258" y="166" width="12" height="1"/><rect x="286" y="166" width="12" height="1"/><rect x="314" y="166" width="6" height="1"/>
+        </g>
+        <!-- 울타리 -->
+        <g>
+          <rect x="0" y="183" width="320" height="1" fill="#55616d"/><rect x="0" y="186" width="320" height="1" fill="#55616d"/>
+          <g fill="#3b4652">
+            <rect x="4" y="181" width="2" height="8"/><rect x="28" y="181" width="2" height="8"/><rect x="52" y="181" width="2" height="8"/><rect x="76" y="181" width="2" height="8"/>
+            <rect x="100" y="181" width="2" height="8"/><rect x="124" y="181" width="2" height="8"/><rect x="148" y="181" width="2" height="8"/><rect x="172" y="181" width="2" height="8"/>
+            <rect x="196" y="181" width="2" height="8"/><rect x="220" y="181" width="2" height="8"/><rect x="244" y="181" width="2" height="8"/><rect x="268" y="181" width="2" height="8"/>
+            <rect x="292" y="181" width="2" height="8"/><rect x="316" y="181" width="2" height="8"/>
+          </g>
+          <g fill="#3bb273">
+            <rect x="36" y="188" width="10" height="4"/><rect x="38" y="186" width="6" height="2"/>
+            <rect x="150" y="188" width="8" height="4"/><rect x="152" y="186" width="4" height="2"/>
+            <rect x="250" y="188" width="12" height="4"/><rect x="253" y="186" width="6" height="2"/>
+          </g>
+        </g>
+        <!-- 파렛트 더미 -->
+        <g transform="translate(96,152)">
+          <rect x="0" y="-3" width="14" height="3" fill="#a8743a"/><rect x="0" y="-2" width="14" height="1" fill="#6e4a22"/>
+          <rect x="1" y="-9" width="6" height="6" fill="#c9a06a"/><rect x="7" y="-8" width="6" height="5" fill="#b58d5a"/>
+          <rect x="1" y="-9" width="6" height="1" fill="#e0bf8e"/><rect x="7" y="-8" width="6" height="1" fill="#e0bf8e"/>
+          <rect x="16" y="-3" width="14" height="3" fill="#a8743a"/><rect x="16" y="-2" width="14" height="1" fill="#6e4a22"/>
+          <rect x="18" y="-7" width="10" height="4" fill="#3b82d6"/><rect x="18" y="-7" width="10" height="1" fill="#fff" opacity=".3"/>
+        </g>
+        <!-- 경비 초소 + 차단기 -->
+        <g transform="translate(282,152)">
+          <rect x="0" y="-16" width="16" height="16" fill="#e9eff5"/>
+          <rect x="12" y="-16" width="4" height="16" fill="#c9d3dd"/>
+          <rect x="-1" y="-18" width="18" height="3" fill="#3b4652"/>
+          <rect x="2" y="-13" width="6" height="5" fill="#7cc0e8"/><rect x="2" y="-13" width="6" height="1" fill="#fff" opacity=".6"/>
+          <rect x="10" y="-9" width="3" height="9" fill="#56697f"/>
+          <rect x="-16" y="-6" width="16" height="2" fill="#e8c547"/>
+          <rect x="-16" y="-6" width="4" height="2" fill="#d9433b"/><rect x="-8" y="-6" width="4" height="2" fill="#d9433b"/>
+          <rect x="-1" y="-8" width="2" height="8" fill="#2b2f36"/>
+        </g>
+        <!-- 도로를 지나가는 트럭 -->
+        <g class="road-truck">
+          <rect x="0" y="-11" width="9" height="9" fill="#ffd25a"/>
+          <rect x="7" y="-11" width="2" height="9" fill="#d9a430"/>
+          <rect x="1" y="-10" width="5" height="4" fill="#2a3a55"/>
+          <rect x="1" y="-10" width="5" height="1" fill="#8fd4ff"/>
+          <rect x="9" y="-12" width="32" height="2" fill="#2b2f36"/>
+          <rect x="10" y="-19" width="30" height="7" fill="#8e5bd3"/>
+          <rect x="10" y="-19" width="30" height="1" fill="#fff" opacity=".3"/>
+          <rect x="10" y="-13" width="30" height="1" fill="#000" opacity=".3"/>
+          <rect x="10" y="-19" width="30" height="7" fill="url(#p-corr)"/>
+          <rect x="0" y="-3" width="4" height="3" fill="#2b2f36"/><rect x="12" y="-3" width="4" height="3" fill="#2b2f36"/><rect x="32" y="-3" width="4" height="3" fill="#2b2f36"/>
+          <rect x="1" y="-2" width="2" height="1" fill="#777"/><rect x="13" y="-2" width="2" height="1" fill="#777"/><rect x="33" y="-2" width="2" height="1" fill="#777"/>
+        </g>
+
+        <!-- 가로등 -->
+        <g>
+          <rect x="62" y="98" width="2" height="26" fill="#3b4652"/><rect x="62" y="98" width="1" height="26" fill="#55616d"/>
+          <rect x="60" y="96" width="7" height="3" fill="#3b4652"/><rect x="61" y="97" width="5" height="1" fill="#fff2a1"/>
+          <rect x="60" y="123" width="6" height="2" fill="#2b2f36"/>
+          <rect x="248" y="98" width="2" height="26" fill="#3b4652"/><rect x="248" y="98" width="1" height="26" fill="#55616d"/>
+          <rect x="246" y="96" width="7" height="3" fill="#3b4652"/><rect x="247" y="97" width="5" height="1" fill="#fff2a1"/>
+          <rect x="246" y="123" width="6" height="2" fill="#2b2f36"/>
+        </g>
+
+        <!-- 메인 갠트리 크레인 -->
+        <g class="crane crane-main" transform="translate(132,124)">
+          <rect x="33" y="-5" width="12" height="5" fill="#2b2f36"/><rect x="57" y="-5" width="12" height="5" fill="#2b2f36"/>
+          <rect x="33" y="-5" width="12" height="1" fill="#555c66"/><rect x="57" y="-5" width="12" height="1" fill="#555c66"/>
+          <rect x="37" y="-84" width="5" height="79" fill="#3a7bd5"/><rect x="40" y="-84" width="2" height="79" fill="#2a5aa8"/>
+          <rect x="61" y="-84" width="5" height="79" fill="#3a7bd5"/><rect x="64" y="-84" width="2" height="79" fill="#2a5aa8"/>
+          <rect x="37" y="-48" width="29" height="2" fill="#3a7bd5"/><rect x="37" y="-26" width="29" height="2" fill="#3a7bd5"/>
+          <rect x="37" y="-70" width="29" height="2" fill="#3a7bd5"/>
+          <rect x="42" y="-46" width="19" height="20" fill="url(#p-lattice)"/>
+          <rect x="42" y="-68" width="19" height="20" fill="url(#p-lattice)"/>
+          <!-- 붐(가로보) -->
+          <rect x="-34" y="-88" width="110" height="5" fill="#3a7bd5"/>
+          <rect x="-34" y="-88" width="110" height="1" fill="#8fbaf0"/>
+          <rect x="-34" y="-84" width="110" height="1" fill="#2a5aa8"/>
+          <rect x="-34" y="-87" width="110" height="3" fill="url(#p-lattice)"/>
+          <rect x="-34" y="-92" width="4" height="9" fill="#3a7bd5"/>
+          <rect x="-34" y="-92" width="4" height="1" fill="#8fbaf0"/>
+          <!-- 기계실 -->
+          <rect x="60" y="-102" width="18" height="14" fill="#e9eff5"/>
+          <rect x="74" y="-102" width="4" height="14" fill="#c9d3dd"/>
+          <rect x="60" y="-102" width="18" height="1" fill="#ffffff"/>
+          <rect x="63" y="-99" width="3" height="3" fill="#2a3a55"/><rect x="69" y="-99" width="3" height="3" fill="#2a3a55"/>
+          <rect x="62" y="-104" width="14" height="2" fill="#3b4652"/>
+          <!-- A 프레임 + 타이로드 -->
+          <polygon points="42,-88 52,-114 56,-114 66,-88" fill="#3a7bd5"/>
+          <polygon points="54,-114 56,-114 66,-88 62,-88" fill="#2a5aa8"/>
+          <line x1="-31" y1="-92" x2="53" y2="-113" stroke="#2a5aa8" stroke-width="1.4"/>
+          <line x1="55" y1="-113" x2="76" y2="-101" stroke="#2a5aa8" stroke-width="1.4"/>
+          <rect x="50" y="-117" width="8" height="3" fill="#e74c3c"/>
+          <rect class="beacon" x="53" y="-119" width="2" height="2" fill="#ffe66d"/>
+          <!-- 트롤리 + 매달린 컨테이너 -->
+          <g class="trolley">
+            <rect x="-6" y="0" width="12" height="4" fill="#ffd25a"/>
+            <rect x="-6" y="0" width="12" height="1" fill="#fff1b8"/>
+            <rect x="-6" y="3" width="12" height="1" fill="#b8862c"/>
+            <rect x="-1" y="4" width="2" height="30" fill="#2b2f36"/>
+            <g class="hook">
+              <rect x="-8" y="34" width="16" height="2" fill="#2b2f36"/>
+              <rect x="-8" y="36" width="16" height="7" fill="#e0592a"/>
+              <rect x="-8" y="36" width="16" height="1" fill="#fff" opacity=".3"/>
+              <rect x="-8" y="42" width="16" height="1" fill="#000" opacity=".3"/>
+              <rect x="-8" y="36" width="16" height="7" fill="url(#p-corr)"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- 컨테이너 야드 + 야드 크레인 -->
+        <g class="yard" transform="translate(208,124)">
+          <g>
+            <rect x="0" y="-7" width="13" height="6" fill="#3b82d6"/><rect x="0" y="-14" width="13" height="6" fill="#e9c93a"/><rect x="0" y="-21" width="13" height="6" fill="#e0592a"/>
+            <rect x="14" y="-7" width="13" height="6" fill="#3bb273"/><rect x="14" y="-14" width="13" height="6" fill="#8e5bd3"/>
+            <rect x="28" y="-7" width="13" height="6" fill="#e0592a"/><rect x="28" y="-14" width="13" height="6" fill="#3b82d6"/><rect x="28" y="-21" width="13" height="6" fill="#3bb273"/><rect x="28" y="-28" width="13" height="6" fill="#e9c93a"/>
+            <rect x="42" y="-7" width="13" height="6" fill="#8e5bd3"/><rect x="42" y="-14" width="13" height="6" fill="#e0592a"/>
+            <g fill="#fff" opacity=".28">
+              <rect x="0" y="-7" width="13" height="1"/><rect x="0" y="-14" width="13" height="1"/><rect x="0" y="-21" width="13" height="1"/>
+              <rect x="14" y="-7" width="13" height="1"/><rect x="14" y="-14" width="13" height="1"/>
+              <rect x="28" y="-7" width="13" height="1"/><rect x="28" y="-14" width="13" height="1"/><rect x="28" y="-21" width="13" height="1"/><rect x="28" y="-28" width="13" height="1"/>
+              <rect x="42" y="-7" width="13" height="1"/><rect x="42" y="-14" width="13" height="1"/>
+            </g>
+            <g fill="#000" opacity=".28">
+              <rect x="0" y="-2" width="13" height="1"/><rect x="0" y="-9" width="13" height="1"/><rect x="0" y="-16" width="13" height="1"/>
+              <rect x="14" y="-2" width="13" height="1"/><rect x="14" y="-9" width="13" height="1"/>
+              <rect x="28" y="-2" width="13" height="1"/><rect x="28" y="-9" width="13" height="1"/><rect x="28" y="-16" width="13" height="1"/><rect x="28" y="-23" width="13" height="1"/>
+              <rect x="42" y="-2" width="13" height="1"/><rect x="42" y="-9" width="13" height="1"/>
+              <rect x="11" y="-21" width="2" height="20"/><rect x="25" y="-14" width="2" height="13"/><rect x="39" y="-28" width="2" height="27"/><rect x="53" y="-14" width="2" height="13"/>
+            </g>
+            <rect x="0" y="-28" width="55" height="28" fill="url(#p-corr)"/>
+          </g>
+          <g class="crane crane-yard">
+            <rect x="-5" y="-44" width="4" height="44" fill="#e8a33d"/><rect x="-3" y="-44" width="2" height="44" fill="#b87a22"/>
+            <rect x="58" y="-44" width="4" height="44" fill="#e8a33d"/><rect x="60" y="-44" width="2" height="44" fill="#b87a22"/>
+            <rect x="-7" y="-48" width="71" height="4" fill="#e8a33d"/>
+            <rect x="-7" y="-48" width="71" height="1" fill="#ffd79a"/>
+            <rect x="-7" y="-45" width="71" height="1" fill="#b87a22"/>
+            <rect x="-7" y="-47" width="71" height="2" fill="url(#p-lattice)"/>
+            <rect x="-6" y="-3" width="6" height="3" fill="#2b2f36"/><rect x="57" y="-3" width="6" height="3" fill="#2b2f36"/>
+            <g class="hoist">
+              <rect x="0" y="0" width="8" height="3" fill="#2b2f36"/>
+              <rect x="3" y="3" width="2" height="8" fill="#2b2f36"/>
+              <rect x="-2" y="11" width="13" height="2" fill="#2b2f36"/>
+              <rect x="-2" y="13" width="13" height="6" fill="#3b82d6"/>
+              <rect x="-2" y="13" width="13" height="1" fill="#fff" opacity=".3"/>
+              <rect x="-2" y="18" width="13" height="1" fill="#000" opacity=".3"/>
+              <rect x="-2" y="13" width="13" height="6" fill="url(#p-corr)"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- 창고 -->
+        <g class="warehouse" transform="translate(264,124)">
+          <rect x="0" y="-46" width="54" height="46" fill="#d8dee5"/>
+          <rect x="46" y="-46" width="8" height="46" fill="#b9c2cc"/>
+          <rect x="0" y="-46" width="54" height="2" fill="#eef2f6"/>
+          <rect x="0" y="-14" width="54" height="14" fill="#c3cbd4"/>
+          <rect x="0" y="-14" width="54" height="1" fill="#9aa5b1"/>
+          <polygon points="-3,-46 27,-64 57,-46" fill="#4f6378"/>
+          <polygon points="0,-46 27,-61 54,-46" fill="#5f7590"/>
+          <polygon points="0,-46 27,-61 54,-46" fill="url(#p-roof)"/>
+          <rect x="25" y="-66" width="4" height="4" fill="#4f6378"/>
+          <rect x="40" y="-60" width="3" height="8" fill="#6c7682"/><rect x="39" y="-61" width="5" height="2" fill="#56626f"/>
+          <!-- 셔터문 -->
+          <rect x="18" y="-22" width="18" height="22" fill="#56697f"/>
+          <rect x="18" y="-22" width="18" height="1" fill="#2b2f36"/>
+          <g fill="#3f4f61">
+            <rect x="18" y="-18" width="18" height="1"/><rect x="18" y="-14" width="18" height="1"/><rect x="18" y="-10" width="18" height="1"/><rect x="18" y="-6" width="18" height="1"/><rect x="18" y="-2" width="18" height="1"/>
+          </g>
+          <rect x="17" y="-23" width="20" height="1" fill="#2b2f36"/>
+          <!-- 창문 -->
+          <rect x="4" y="-40" width="10" height="8" fill="#7cc0e8"/><rect x="4" y="-40" width="10" height="1" fill="#fff" opacity=".6"/><rect x="8" y="-40" width="1" height="8" fill="#2b2f36" opacity=".4"/>
+          <rect x="40" y="-40" width="10" height="8" fill="#7cc0e8"/><rect x="40" y="-40" width="10" height="1" fill="#fff" opacity=".6"/><rect x="44" y="-40" width="1" height="8" fill="#2b2f36" opacity=".4"/>
+          <!-- 간판 -->
+          <rect x="17" y="-40" width="20" height="10" fill="#ffd25a"/>
+          <rect x="17" y="-40" width="20" height="1" fill="#fff1b8"/>
+          <rect x="17" y="-31" width="20" height="1" fill="#b8862c"/>
+          <text x="20" y="-33" font-size="6" fill="#3b2a07" font-family="Galmuri11, monospace">창고A</text>
+          <!-- 소화기 / 파렛트 -->
+          <rect x="40" y="-6" width="2" height="4" fill="#d9433b"/>
+          <rect x="2" y="-3" width="12" height="3" fill="#a8743a"/><rect x="2" y="-2" width="12" height="1" fill="#6e4a22"/>
+          <rect x="3" y="-8" width="5" height="5" fill="#c9a06a"/><rect x="8" y="-7" width="5" height="4" fill="#b58d5a"/>
+          <rect x="3" y="-8" width="5" height="1" fill="#e0bf8e"/>
+        </g>
+
+        <!-- 트럭 (컨테이너 적재) -->
+        <g class="truck" transform="translate(86,124)">
+          <rect x="0" y="-11" width="9" height="9" fill="#f1f3f5"/>
+          <rect x="7" y="-11" width="2" height="9" fill="#c9d3dd"/>
+          <rect x="1" y="-10" width="5" height="4" fill="#2a3a55"/>
+          <rect x="1" y="-10" width="5" height="1" fill="#8fd4ff"/>
+          <rect x="9" y="-12" width="32" height="2" fill="#2b2f36"/>
+          <rect x="10" y="-19" width="30" height="7" fill="#3bb273"/>
+          <rect x="10" y="-19" width="30" height="1" fill="#fff" opacity=".3"/>
+          <rect x="10" y="-13" width="30" height="1" fill="#000" opacity=".3"/>
+          <rect x="10" y="-19" width="30" height="7" fill="url(#p-corr)"/>
+          <rect x="0" y="-3" width="4" height="3" fill="#2b2f36"/><rect x="12" y="-3" width="4" height="3" fill="#2b2f36"/><rect x="32" y="-3" width="4" height="3" fill="#2b2f36"/>
+          <rect x="1" y="-2" width="2" height="1" fill="#777"/><rect x="13" y="-2" width="2" height="1" fill="#777"/><rect x="33" y="-2" width="2" height="1" fill="#777"/>
+        </g>
+
+        <!-- 지게차 -->
+        <g class="forklift">
+          <g class="forklift-body">
+            <rect x="0" y="-8" width="10" height="6" fill="#f2b705"/>
+            <rect x="0" y="-8" width="10" height="1" fill="#ffe17a"/>
+            <rect x="2" y="-13" width="6" height="5" fill="#2b2f36"/>
+            <rect x="3" y="-12" width="4" height="3" fill="#8fd4ff"/>
+            <rect x="10" y="-15" width="1" height="15" fill="#4a4a4a"/>
+            <rect x="11" y="-2" width="7" height="1" fill="#4a4a4a"/>
+            <rect x="12" y="-8" width="6" height="6" fill="#8e5bd3"/>
+            <rect x="12" y="-8" width="6" height="1" fill="#fff" opacity=".3"/>
+            <rect x="1" y="-2" width="3" height="2" fill="#2b2f36"/><rect x="6" y="-2" width="3" height="2" fill="#2b2f36"/>
+          </g>
+        </g>
+
+        <!-- 콘 -->
+        <g fill="#e67e22">
+          <rect x="121" y="129" width="2" height="3"/><rect x="120" y="132" width="4" height="1"/>
+          <rect x="203" y="129" width="2" height="3"/><rect x="202" y="132" width="4" height="1"/>
+        </g>
+
+        <!-- 작업자들 -->
+        <g class="worker worker-1">
+          <rect x="0" y="-9" width="4" height="1" fill="#ffd25a"/><rect x="0" y="-8" width="3" height="2" fill="#f3c6a0"/>
+          <rect x="0" y="-6" width="3" height="3" fill="#ff7a1a"/><rect x="0" y="-5" width="3" height="1" fill="#fff" opacity=".6"/>
+          <rect class="leg-a" x="0" y="-3" width="3" height="3" fill="#2a3a55"/>
+          <rect class="leg-b" x="0" y="-3" width="1" height="3" fill="#2a3a55"/><rect class="leg-b" x="2" y="-3" width="1" height="3" fill="#2a3a55"/>
+        </g>
+        <g class="worker worker-2">
+          <rect x="0" y="-9" width="4" height="1" fill="#ffffff"/><rect x="0" y="-8" width="3" height="2" fill="#e0a88a"/>
+          <rect x="0" y="-6" width="3" height="3" fill="#ff7a1a"/><rect x="0" y="-5" width="3" height="1" fill="#fff" opacity=".6"/>
+          <rect x="3" y="-6" width="2" height="2" fill="#f7f3e6"/>
+          <rect x="0" y="-3" width="1" height="3" fill="#2a3a55"/><rect x="2" y="-3" width="1" height="3" fill="#2a3a55"/>
+        </g>
+        <g class="worker worker-3">
+          <rect x="0" y="-9" width="4" height="1" fill="#3b82d6"/><rect x="0" y="-8" width="3" height="2" fill="#f3c6a0"/>
+          <rect x="0" y="-6" width="3" height="3" fill="#ff7a1a"/><rect x="0" y="-5" width="3" height="1" fill="#fff" opacity=".6"/>
+          <rect class="leg-a" x="0" y="-3" width="3" height="3" fill="#2a3a55"/>
+          <rect class="leg-b" x="0" y="-3" width="1" height="3" fill="#2a3a55"/><rect class="leg-b" x="2" y="-3" width="1" height="3" fill="#2a3a55"/>
+        </g>
+
+        <!-- 갈매기 -->
+        <g class="gulls" fill="none" stroke="#ffffff" stroke-width="0.8">
+          <path class="gull gull-1" d="M60,20 l2,-1 l2,1" />
+          <path class="gull gull-2" d="M170,12 l2,-1 l2,1" />
+          <path class="gull gull-3" d="M100,30 l2,-1 l2,1" />
+        </g>
+      </svg>
+      <div class="scene-vignette"></div>
+    </div>
+
+    <!-- ===================== 상단 왼쪽 : 로고 / DAY / LV ===================== -->
+    <header id="brand" class="panel">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">🚢</span>
+        <div class="logo-text">
+          <h1>무역왕 키우기</h1>
+          <p>오늘도 선적은 망했다</p>
+        </div>
+      </div>
+      <div class="ceo" id="ceo">
+        <span class="ceo-sprite" id="ceo-sprite"></span>
+        <div class="ceo-text">
+          <strong id="company-name">제발통관해줘무역</strong>
+          <span id="ceo-name">사장 김무역</span>
+        </div>
+      </div>
+      <div class="brand-row">
+        <div class="chip chip-day"><span class="chip-label">DAY</span><strong id="day-value">1</strong></div>
+        <div class="chip chip-level"><span class="chip-label">LV</span><strong id="level-value">1</strong></div>
+        <button type="button" id="reset-btn" class="btn btn-small btn-ghost">새 게임</button>
+      </div>
+      <div class="progress" aria-label="무역왕까지 진행도">
+        <span class="progress-label">👑 무역왕까지</span>
+        <span class="progress-track" id="progress-track"></span>
+        <strong class="progress-count" id="progress-count">0 / 10</strong>
+      </div>
+    </header>
+
+    <!-- ===================== 상단 오른쪽 : 자본 / 멘탈 / 경험치 ===================== -->
+    <section id="hud" class="panel" aria-label="회사 현황">
+      <div class="stat stat-cash">
+        <span class="stat-icon" aria-hidden="true">💰</span>
+        <div class="stat-body">
+          <span class="stat-label">자본 <em id="save-indicator" class="save-indicator">💾 자동저장</em></span>
+          <strong class="stat-value" id="cash-value">₩0</strong>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat stat-mental">
+          <span class="stat-icon" aria-hidden="true">🧠</span>
+          <div class="stat-body">
+            <span class="stat-label">멘탈 <em id="mental-value">100%</em></span>
+            <div class="bar" role="progressbar" aria-label="멘탈" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+              <i class="bar-fill" id="mental-bar"></i>
+            </div>
+          </div>
+        </div>
+        <div class="stat stat-xp">
+          <span class="stat-icon" aria-hidden="true">⭐</span>
+          <div class="stat-body">
+            <span class="stat-label">경험치 <em id="xp-value">0 / 3</em></span>
+            <div class="bar bar-xp" role="progressbar" aria-label="경험치" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0">
+              <i class="bar-fill" id="xp-bar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 하단 : 계약 상황 이벤트 창 ===================== -->
+    <section id="mission" class="panel window" aria-live="polite" aria-label="계약 진행">
+      <div class="window-title">
+        <span class="window-badge">CONTRACT</span>
+        <span class="window-heading" id="contract-heading">📦 계약 #1</span>
+        <span class="contract-meta" id="contract-meta"></span>
+        <span class="window-hint">A / B / C 키로도 선택할 수 있어요</span>
+        <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+      <div class="contract-strip" id="contract-strip">
+        <span class="strip-item"><span class="strip-label">예상 수익</span><strong id="strip-reward">₩0</strong></span>
+        <span class="strip-item"><span class="strip-label">위험도</span><strong id="strip-risk" class="risk">★☆☆</strong></span>
+        <span class="strip-item strip-terms"><span class="strip-label">주요 조건</span><span id="strip-terms"></span></span>
+        <span class="strip-item"><span class="strip-label">화물</span><strong id="strip-cargo"></strong></span>
+      </div>
+      <div class="window-body">
+        <div class="buyer">
+          <div class="portrait-wrap buyer-card" id="buyer-card">
+            <div class="portrait buyer-portrait" id="buyer-portrait-box">
+              <span class="buyer-portrait-art" id="buyer-portrait"></span>
+              <span class="buyer-flag" id="buyer-flag">🇯🇵 JP</span>
+            </div>
+            <h2 id="buyer-name">바이어</h2>
+            <p class="buyer-company" id="buyer-company"></p>
+            <span class="buyer-tag" id="buyer-tag">공손형</span>
+            <p class="buyer-quip" id="buyer-quip"></p>
+          </div>
+          <div class="buyer-info">
+            <div class="talk-row">
+              <p id="buyer-message" class="bubble">...</p>
+              <div class="ceo-say" id="ceo-say">
+                <span class="ceo-say-sprite" id="ceo-say-sprite"></span>
+                <p class="ceo-say-bubble"><strong id="ceo-say-name">사장님</strong><span id="ceo-say-line"></span></p>
+              </div>
+            </div>
+            <p class="choice-label">▼ 어떻게 대응할까요?</p>
+            <div id="choices" class="choices"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sys-line" id="sys-line"><span class="sys-badge">SYSTEM</span><span id="sys-text">새 계약이 도착했습니다.</span></div>
+    </section>
+
+    <!-- ===================== 계약 결과 팝업 ===================== -->
+    <div id="result" class="overlay overlay-result" hidden>
+      <div class="panel result-box" role="dialog" aria-modal="true" aria-labelledby="result-title">
+        <div class="result-stamp" id="result-stamp">계약 성공</div>
+        <h2 id="result-title">계약 성공!</h2>
+        <div class="result-deltas">
+          <span id="result-cash" class="delta">+₩0</span>
+          <span id="result-exp" class="delta">EXP +1</span>
+          <span id="result-mental" class="delta">멘탈 +0</span>
+        </div>
+        <div class="buyer-react" id="buyer-react">
+          <span class="buyer-react-art" id="buyer-react-art"></span>
+          <p class="buyer-react-bubble"><strong id="buyer-react-name">바이어</strong><span id="result-line"></span></p>
+        </div>
+        <div class="reaction" id="reaction">
+          <span class="reaction-sprite" id="reaction-sprite"></span>
+          <p class="reaction-bubble"><strong id="reaction-name">김무역</strong><span id="reaction-line"></span></p>
+        </div>
+        <p id="result-explain" class="result-explain"></p>
+        <button type="button" id="result-btn" class="btn">다음 계약 ▶</button>
+      </div>
+    </div>
+
+    <!-- ===================== 돌발 이벤트 팝업 (선택형) ===================== -->
+    <div id="event" class="overlay overlay-result" hidden>
+      <div class="panel result-box event-box" role="dialog" aria-modal="true" aria-labelledby="event-title">
+        <div class="result-stamp event-stamp">EVENT</div>
+        <p class="event-eyebrow">📣 돌발 이벤트</p>
+        <div class="event-head">
+          <span class="event-icon" id="event-icon">🚢</span>
+          <h2 id="event-title">선박 지연</h2>
+        </div>
+        <p id="event-text" class="result-line"></p>
+        <div class="event-step" id="event-pick">
+          <p class="choice-label">▼ 어떻게 대응할까요?</p>
+          <div class="choices event-choices" id="event-choices"></div>
+        </div>
+        <div class="event-step" id="event-outcome" hidden>
+          <p id="event-result" class="event-result"></p>
+          <div class="result-deltas">
+            <span id="event-cash" class="delta">+₩0</span>
+            <span id="event-mental" class="delta">멘탈 +0</span>
+          </div>
+          <p class="event-note">※ 이벤트 효과는 계약 판정과 별개로 적용됩니다.</p>
+          <button type="button" id="event-btn" class="btn">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== 엔딩 ===================== -->
+    <div id="ending" class="overlay overlay-ending" hidden>
+      <div class="panel ending-box" role="dialog" aria-modal="true" aria-labelledby="ending-title">
+        <p class="gameover-eyebrow" id="ending-eyebrow">GAME OVER</p>
+        <h2 id="ending-title">엔딩</h2>
+        <div class="ending-scene">
+          <span class="ending-sprite" id="ending-sprite"></span>
+          <p id="ending-text" class="ending-text"></p>
+        </div>
+        <dl class="ending-summary" id="ending-summary"></dl>
+        <button type="button" id="ending-btn" class="btn">다시 시작</button>
+      </div>
+    </div>
+
+    <!-- ===================== 타이틀 화면 ===================== -->
+    <section id="title" class="screen screen-title" hidden>
+      <div class="title-inner">
+        <div class="title-logo">
+          <span class="title-icon" aria-hidden="true">🚢</span>
+          <h1 class="title-h1">무역왕 키우기</h1>
+          <p class="title-sub">오늘도 선적은 망했다</p>
+        </div>
+        <nav class="title-menu" aria-label="메인 메뉴">
+          <button type="button" id="title-new" class="menu-btn">▶ 새 게임 시작</button>
+          <button type="button" id="title-continue" class="menu-btn" disabled>▶ 이어하기</button>
+          <button type="button" id="title-help" class="menu-btn">▶ 게임 방법</button>
+        </nav>
+        <p class="title-save" id="title-save"></p>
+        <p class="title-press">PRESS START · 16-BIT TRADE SIM</p>
+      </div>
+      <div class="help-modal" id="help" hidden>
+        <div class="panel help-box" role="dialog" aria-modal="true" aria-labelledby="help-title">
+          <div class="window-title">
+            <span class="window-badge">HELP</span>
+            <span class="window-heading" id="help-title">📖 게임 방법</span>
+          </div>
+          <div class="window-body help-body">
+            <ol>
+              <li>사장님 캐릭터를 고르고 회사명을 정합니다. 캐릭터마다 수익·손실·멘탈 특성이 다릅니다.</li>
+              <li>항구에 도착한 바이어의 무역 퀴즈에 A / B / C 중 하나를 선택해 답합니다.</li>
+              <li>정답이면 자본이 늘고 멘탈이 회복됩니다. 오답이면 자본과 멘탈이 깎입니다.</li>
+              <li>가끔 돌발 이벤트가 터져 자본이나 멘탈이 흔들립니다. 정답 판정과는 무관합니다.</li>
+              <li>계약 3건마다 회사 레벨이 오릅니다. 성공 계약 10건을 달성하면 무역왕 엔딩!</li>
+              <li>자본이 0원이 되면 파산, 멘탈이 0이 되면 퇴사 엔딩입니다. 진행 상황은 자동 저장됩니다.</li>
+            </ol>
+            <button type="button" id="help-close" class="btn">닫기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 캐릭터 선택 화면 ===================== -->
+    <section id="select" class="screen screen-select" hidden>
+      <div class="screen-head">
+        <span class="window-badge">SELECT</span>
+        <h2>사장님을 선택하세요</h2>
+        <p>← → 키 또는 클릭으로 선택 · Enter 로 결정</p>
+      </div>
+      <div class="char-grid" id="char-grid" role="radiogroup" aria-label="캐릭터 선택"></div>
+      <div class="char-detail panel" id="char-detail"></div>
+      <div class="screen-actions">
+        <button type="button" id="select-back" class="btn btn-ghost">◀ 타이틀</button>
+        <button type="button" id="select-confirm" class="btn">이 캐릭터로 시작 ▶</button>
+      </div>
+    </section>
+
+    <!-- ===================== 회사명 입력 화면 ===================== -->
+    <section id="naming" class="screen screen-naming" hidden>
+      <div class="panel naming-box">
+        <div class="window-title">
+          <span class="window-badge">SETUP</span>
+          <span class="window-heading">🏢 회사명을 정하세요</span>
+        </div>
+        <div class="window-body">
+          <div class="naming-ceo">
+            <span class="naming-sprite" id="naming-sprite"></span>
+            <p class="bubble" id="naming-quote">사장님, 회사 이름은 뭐로 할까요?</p>
+          </div>
+          <label class="naming-label" for="company-input">회사명 (최대 20자)</label>
+          <div class="naming-row">
+            <input type="text" id="company-input" class="pixel-input" maxlength="20" value="제발통관해줘무역" autocomplete="off" spellcheck="false" />
+            <span class="naming-count" id="company-count">8 / 20</span>
+          </div>
+          <div class="screen-actions">
+            <button type="button" id="naming-back" class="btn btn-ghost">◀ 캐릭터</button>
+            <button type="button" id="naming-start" class="btn">무역 시작 ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 시스템 토스트 -->
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <!-- 플로팅 텍스트 레이어 -->
+    <div id="fx" aria-hidden="true"></div>
+
+    <!-- 선택 직후 피드백 배너 (보상 / EXP / 멘탈) -->
+    <div id="burst" aria-hidden="true"></div>
+
+    <!-- 레벨업 연출 -->
+    <div id="levelup" class="levelup" hidden aria-live="polite">
+      <div class="levelup-confetti" aria-hidden="true"></div>
+      <div class="levelup-banner">
+        <span class="levelup-eyebrow">★ LEVEL UP ★</span>
+        <strong id="levelup-value">LV 2</strong>
+        <span class="levelup-sub" id="levelup-sub">회사가 성장했습니다!</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
