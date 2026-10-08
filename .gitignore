@@ -1,0 +1,16 @@
+# 의존성 (배포 환경에서 package-lock.json 기준으로 설치)
+node_modules/
+
+# 빌드 산출물 (Vercel 이 빌드 시 생성)
+dist/
+
+# Vercel 로컬 설정
+.vercel/
+
+# 로그 / OS / 에디터
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
