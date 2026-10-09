@@ -680,6 +680,7 @@
               <li>가끔 돌발 이벤트가 터져 자본이나 멘탈이 흔들립니다. 정답 판정과는 무관합니다.</li>
               <li>계약 3건마다 회사 레벨이 오릅니다. 성공 계약 10건을 달성하면 무역왕 엔딩!</li>
               <li>자본이 0원이 되면 파산, 멘탈이 0이 되면 퇴사 엔딩입니다. 진행 상황은 자동 저장됩니다.</li>
+              <li>화면 오른쪽 위 🔇 버튼을 누르면 칩튠 배경음악과 효과음이 켜집니다. ⚙ 에서 음량을 조절할 수 있어요.</li>
             </ol>
             <button type="button" id="help-close" class="btn">닫기</button>
           </div>
@@ -726,6 +727,28 @@
         </div>
       </div>
     </section>
+
+    <!-- ===================== 사운드 컨트롤 (우측 상단) ===================== -->
+    <div id="sound" class="sound">
+      <button type="button" id="sound-toggle" class="sound-btn" aria-pressed="false" aria-label="음악 켜기" title="음악 켜기" data-silent>
+        <span class="sound-icon" id="sound-icon" aria-hidden="true">🔇</span>
+        <span class="sound-label" id="sound-label">OFF</span>
+      </button>
+      <button type="button" id="sound-settings" class="sound-btn sound-gear" aria-expanded="false" aria-label="음량 설정" title="음량 설정" data-silent>⚙</button>
+      <div class="sound-panel" id="sound-panel" hidden>
+        <label class="sound-row">
+          <span>🎵 음악</span>
+          <input type="range" id="music-vol" min="0" max="100" step="5" value="50" class="pixel-range" />
+          <strong id="music-vol-value">50</strong>
+        </label>
+        <label class="sound-row">
+          <span>🔔 효과음</span>
+          <input type="range" id="sfx-vol" min="0" max="100" step="5" value="70" class="pixel-range" />
+          <strong id="sfx-vol-value">70</strong>
+        </label>
+        <p class="sound-note" id="sound-note">음악은 버튼을 눌러야 재생됩니다. 설정은 자동 저장돼요.</p>
+      </div>
+    </div>
 
     <!-- 시스템 토스트 -->
     <div id="toast" class="toast" aria-live="polite"></div>

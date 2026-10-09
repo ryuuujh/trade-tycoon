@@ -7,7 +7,7 @@ import {
   renderHUD, renderCompany, renderProgress, renderMission, notify,
   showFeedback, showResult, showEvent, showEnding, setCeoMood, setBuyerMood, setSysLine,
   renderTitle, renderSelect, renderNaming, showScreen,
-  bindReset, bindKeyboard, resetHUDMemory, confirmDialog
+  bindReset, bindKeyboard, bindSound, resetHUDMemory, confirmDialog
 } from './ui.js';
 
 const SAVE_KEY = 'trade-tycoon-save';
@@ -276,6 +276,7 @@ bindReset(() => {
   goTitle();
 });
 bindKeyboard();
+bindSound();
 
 const gameEl = document.getElementById('game');
 gameEl.addEventListener('animationend', (e) => { if (e.target === gameEl) gameEl.classList.remove('boot'); });

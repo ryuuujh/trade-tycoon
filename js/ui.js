@@ -1,6 +1,7 @@
 // 화면 렌더링 : HUD / 계약 이벤트 창 / 피드백 연출 / 결과·이벤트 팝업 / 타이틀·캐릭터 선택·회사명 / 엔딩
 import { characters, spriteSVG } from './characters.js';
 import { buyerSVG } from './buyers.js';
+import * as audio from './audio.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -425,6 +426,7 @@ function burst(text, kind, delay) {
 }
 
 export function showFeedback({ correct, cashDelta, expGain, mentalDelta, levelUp, level }, done) {
+  audio.play(correct ? 'success' : 'fail');
   const game = $('game');
   if (correct) {
     restartAnimation(game, 'flash');
@@ -449,6 +451,7 @@ export function showFeedback({ correct, cashDelta, expGain, mentalDelta, levelUp
 }
 
 export function showLevelUp(level) {
+  audio.play('levelup');
   const box = $('levelup');
   $('levelup-value').textContent = `LV ${level}`;
   $('levelup-sub').textContent = level >= 4 ? '이제 항구에서 사장님을 알아봅니다!' : '회사가 성장했습니다!';
@@ -494,6 +497,7 @@ export function showResult({ correct, cashDelta, expGain, mentalDelta, line, exp
   $('reaction-line').textContent = reaction;
   $('reaction').classList.toggle('crisis', !!crisis);
 
+  audio.play('pop');
   openPopup('result', 'result-btn', onNext);
 }
 
@@ -550,6 +554,7 @@ export function showEvent(event, onPick, onNext) {
   });
 
   $('event').hidden = false;
+  audio.play('event');
   popupHandler = null;       // 선택 전에는 Enter 로 닫히지 않음
   activeChoices = buttons;   // A/B/C 키로 이벤트 선택 가능
   buttons[0].focus();
@@ -585,6 +590,7 @@ export function showEnding({ kind, title, text, eyebrow, character, mood, summar
     row.append(dt, dd);
     dl.appendChild(row);
   });
+  audio.play(kind === 'king' ? 'ending_king' : 'ending_bad');
   openPopup('ending', 'ending-btn', onRestart);
 }
 
@@ -615,3 +621,68 @@ export function bindKeyboard() {
 }
 
 export const confirmDialog = (message) => window.confirm(message);
+
+/* ---------------------------------------------------------
+   사운드 컨트롤 (우측 상단) + 버튼 클릭음
+   --------------------------------------------------------- */
+export function bindSound() {
+  const toggleBtn = $('sound-toggle');
+  const gearBtn = $('sound-settings');
+  const panel = $('sound-panel');
+  const musicVol = $('music-vol');
+  const sfxVol = $('sfx-vol');
+
+  const render = (st) => {
+    const on = !st.muted;
+    $('sound-icon').textContent = on ? '🔊' : '🔇';
+    $('sound-label').textContent = on ? 'ON' : 'OFF';
+    toggleBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    toggleBtn.setAttribute('aria-label', on ? '음악 끄기' : '음악 켜기');
+    toggleBtn.title = on ? '음악 끄기' : '음악 켜기';
+    toggleBtn.classList.toggle('on', on);
+    toggleBtn.dataset.running = st.running ? 'true' : 'false';
+    musicVol.value = Math.round(st.music * 100);
+    sfxVol.value = Math.round(st.sfx * 100);
+    $('music-vol-value').textContent = Math.round(st.music * 100);
+    $('sfx-vol-value').textContent = Math.round(st.sfx * 100);
+    $('sound-note').textContent = !on
+      ? '음악은 버튼을 눌러야 재생됩니다. 설정은 자동 저장돼요.'
+      : st.running ? '재생 중 · 설정은 자동 저장돼요.' : '화면을 한 번 클릭하면 음악이 이어서 재생됩니다.';
+  };
+  audio.onChange(render);
+  render(audio.getState());
+
+  toggleBtn.addEventListener('click', async () => {
+    const wasMuted = audio.getState().muted;
+    await audio.toggle();
+    if (wasMuted) {
+      audio.play('click');
+      toggleBtn.classList.add('pulse');
+      setTimeout(() => toggleBtn.classList.remove('pulse'), 600);
+    }
+  });
+  gearBtn.addEventListener('click', () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    gearBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    audio.play('click');
+  });
+  musicVol.addEventListener('input', () => audio.setVolume('music', musicVol.value / 100));
+  sfxVol.addEventListener('input', () => audio.setVolume('sfx', sfxVol.value / 100));
+  sfxVol.addEventListener('change', () => audio.play('click'));
+
+  // 패널 바깥 클릭 시 닫기
+  document.addEventListener('pointerdown', (e) => {
+    if (!panel.hidden && !$('sound').contains(e.target)) { panel.hidden = true; gearBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // 모든 버튼 / 카드에 클릭음 (사운드 버튼 자체는 제외)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn || btn.disabled || btn.hasAttribute('data-silent')) return;
+    audio.play('click');
+  }, true);
+
+  // 이전에 켜 둔 상태면 첫 상호작용에서 재개
+  audio.armAutoResume();
+}

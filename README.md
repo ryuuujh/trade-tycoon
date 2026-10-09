@@ -24,6 +24,7 @@ Vercel에서 Framework Preset을 **Vite**, Build Command를 `npm run build`, Out
 - `js/data.js`: 미션(퀴즈)·결과 대사·돌발 이벤트 데이터
 - `js/characters.js`: 사장님 캐릭터 4명 데이터, 능력치, 대사, 16×20 픽셀 스프라이트
 - `js/buyers.js`: 나라별 바이어 8명 데이터, 성격 태그, 반응 대사, 16×16 픽셀 초상화
+- `js/audio.js`: Web Audio API 로 합성한 칩튠 배경음악 시퀀서와 효과음, 음소거/음량 설정 저장
 - `js/ui.js`: 화면 렌더링 (HUD, 대화창, 결과 팝업, 연출)
 - `vite.config.js`: 빌드 설정 (`base: './'` 로 상대 경로 산출물 생성)
 - `assets/images/`: 이미지 리소스
